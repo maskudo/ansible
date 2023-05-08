@@ -1,7 +1,15 @@
 - name: Install packages
   become: true
   apt:
-    name: ["tmux", "fzf", "tldr", "ripgrep"]
+    name: ["tmux", "fzf", "tldr", "ripgrep", "fd-find"]
   tags:
     - install
+    - productivity
+
+- name: Create symbolic link for fd
+  become: true
+  shell: |
+    mkdir -p ~/.local/bin
+    ln -s $(which fdfind) ~/.local/bin/fd
+  tags:
     - productivity
