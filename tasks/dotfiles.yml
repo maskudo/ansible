@@ -1,3 +1,4 @@
+# - include: tasks/ssh.yml
 - name: Installing stow
   apt: name=stow
   tags:
@@ -11,13 +12,13 @@
     recursive: yes
     update: yes
     accept_hostkey: yes
-    version: master
+    version: main
   tags:
     - install
     - dotfiles
     - stow
 - name: Stow dotfiles
-  shell: cd $HOME/.dotfiles && ./ubuntu
+  shell: cd $HOME/.dotfiles && stow dunst i3 kitty lazyvim picom polybar rofi scripts starship tmux vim wallpapers
   tags:
     - install
     - dotfiles
