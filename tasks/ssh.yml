@@ -36,7 +36,7 @@
   authorized_key:
     user: "{{ lookup('env', 'USER') }}"
     state: present
-    key: "{{ dest_key }}.pub"
+    key: "{{lookup ('file',  dest_key + '.pub')}}"
     key_options: 'from="{{ ansible_host }}"'
   tags:
     - dotfiles
