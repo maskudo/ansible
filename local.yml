@@ -20,3 +20,5 @@
     - include: tasks/ssh.yml
     - include: tasks/dotfiles.yml
     - include: tasks/neovim.yml
+  roles:
+    - fonts

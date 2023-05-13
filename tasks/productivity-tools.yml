@@ -1,7 +1,16 @@
 - name: Install packages
   become: true
   apt:
-    name: ["tmux", "fzf", "tldr", "ripgrep", "fd-find"]
+    name: ["tmux", "fzf", "tldr", "ripgrep", "fd-find", "ranger"]
+  tags:
+    - install
+    - productivity
+
+- name: Install tpm for tmux
+  become: true
+  git:
+    repo: https://github.com/tmux-plugins/tpm.git
+    dest: "{{ ansible_env.HOME }}/.tmux/plugins/tpm"
   tags:
     - install
     - productivity
