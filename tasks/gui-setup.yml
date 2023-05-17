@@ -38,6 +38,7 @@
     - gui
 
 - name: Enable LightDM
+  ignore_errors: true
   systemd:
     name: lightdm
     state: started

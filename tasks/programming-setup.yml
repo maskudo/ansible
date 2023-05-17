@@ -1,0 +1,44 @@
+- name: Clone asdf-vm
+  ansible.builtin.git:
+    repo: "https://github.com/asdf-vm/asdf.git"
+    dest: "{{ ansible_env.HOME }}/.asdf"
+    version: "v0.11.3"
+  tags:
+    - install
+    - programming
+
+- name: Add golang plugin to asdf
+  shell: "${HOME}/.asdf/bin/asdf plugin-add golang"
+  register: golang_add
+  failed_when: golang_add == 2
+  tags: 
+    - install
+    - programming
+- name: Install golang latest with asdf
+  shell: "${HOME}/.asdf/bin/asdf install golang latest"
+  tags: 
+    - install
+    - programming
+- name: Set global version for golang to latest 
+  shell: "${HOME}/.asdf/bin/asdf global golang latest"
+  tags: 
+    - install
+    - programming
+
+
+- name: Add nodejs plugin to asdf
+  shell: "${HOME}/.asdf/bin/asdf plugin-add nodejs"
+  tags: 
+    - install
+    - programming
+- name: Install nodejs latest with asdf
+  shell: "${HOME}/.asdf/bin/asdf install nodejs latest"
+  tags: 
+    - install
+    - programming
+- name: Set global version for nodejs to latest 
+  shell: "${HOME}/.asdf/bin/asdf global nodejs latest"
+  tags: 
+    - install
+    - programming
+

@@ -21,20 +21,15 @@
   apt:
     name:
       [
-        "picom",
         "curl",
         "htop",
-        "i3",
-        "rofi",
-        "polybar",
-        "feh",
         "kitty",
-        "dunst",
         "pulseaudio",
         "xbacklight",
         "ccache",
         "ninja-build",
         "python3-pip",
+        "python-is-python3",
         "dconf-editor",
         "nvidia-settings",
         "pavucontrol",

@@ -19,6 +19,7 @@
     - include: tasks/productivity-tools.yml
     - include: tasks/ssh.yml
     - include: tasks/dotfiles.yml
+    - include: tasks/programming-setup.yml
     - include: tasks/neovim.yml
     - include: tasks/gui-setup.yml
   roles:
