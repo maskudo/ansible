@@ -1,0 +1,48 @@
+- name: Install GUI
+  become: true
+  apt:
+    name:
+      [
+        "picom",
+        "i3",
+        "rofi",
+        "polybar",
+        "feh",
+        "kitty",
+        "dunst",
+      ]
+  tags:
+    - install
+    - gui
+
+- name: Install LightDM
+  become: true
+  apt:
+    name: "lightdm"
+    install_recommends: false
+    state: present
+    tags:
+      - install
+      - gui
+
+- name: Install LightDM dependencies
+  become: true
+  apt:
+    name: [
+      "lightdm-gtk-greeter",
+      "lightdm-gtk-greeter-settings"
+      ]
+    state: present
+  tags:
+    - install
+    - gui
+
+- name: Enable LightDM
+  systemd:
+    name: lightdm
+    state: started
+    enabled: yes
+  become: true
+  tags:
+    - install
+    - gui
