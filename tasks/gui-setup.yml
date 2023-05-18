@@ -6,6 +6,7 @@
         "picom",
         "i3",
         "x11-utils",
+        "x11-xserver-utils",
         "xinput",
         "rofi",
         "polybar",

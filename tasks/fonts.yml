@@ -1,0 +1,26 @@
+- name: Create font directory if not exists
+  ansible.builtin.file:
+    path: /usr/share/fonts/nerd-fonts/JetBrainsMono
+    state: directory
+    mode: "0755"
+  become: true
+  tags:
+    - install
+    - font
+
+- name: Download and extract Nerd Fonts
+  become: true
+  ansible.builtin.unarchive:
+    src: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
+    dest: "/usr/share/fonts/nerd-fonts/JetBrainsMono"
+    remote_src: true
+  tags: 
+    - install
+    - font
+
+- name: Update font cache
+  become: true
+  command: fc-cache -f -v
+  tags: 
+    - install
+    - font
