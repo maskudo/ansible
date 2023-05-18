@@ -1,0 +1,13 @@
+- name: Install packages
+  become: true
+  apt:
+    name: ["firefox", "kitty", "copyq", "flameshot"]
+  tags:
+    - install
+    - guip
+
+- name: Install lazygit
+  shell: go install github.com/jesseduffield/lazygit@latest
+  tags:
+    - install
+    - guip

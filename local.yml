@@ -22,5 +22,4 @@
     - include: tasks/programming-setup.yml
     - include: tasks/neovim.yml
     - include: tasks/gui-setup.yml
-  roles:
-    - fonts
+    - include: tasks/gui-productivity.yml

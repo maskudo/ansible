@@ -23,7 +23,6 @@
       [
         "curl",
         "htop",
-        "kitty",
         "pulseaudio",
         "xbacklight",
         "ccache",
@@ -56,37 +55,3 @@
     - neovim
     - core
 
-- name: Install LightDM
-  become: true
-  apt:
-    name: "lightdm"
-    install_recommends: false
-    state: present
-- name: Install LightDM dependencies
-  become: true
-  apt:
-    name: [
-      "lightdm-gtk-greeter",
-      "lightdm-gtk-greeter-settings"
-      ]
-    state: present
-
-- name: Enable LightDM
-  systemd:
-    name: lightdm
-    state: started
-    enabled: yes
-  become: true
-
-
-# - name: Configure SDDM to use i3
-#   become_user: root
-#   template:
-#     src: templates/Xsession.j2
-#     dest: /usr/share/sddm/scripts/Xsession
-#     mode: '0644'
-#
-# - name: Restart SDDM
-#   service:
-#     name: sddm
-#     state: restarted

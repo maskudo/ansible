@@ -5,34 +5,23 @@
       [
         "picom",
         "i3",
+        "x11-utils",
+        "xinput",
         "rofi",
         "polybar",
         "feh",
         "kitty",
         "dunst",
+        "light",
+        "lightdm",
+        "lightdm-gtk-greeter",
+        "lightdm-gtk-greeter-settings",
+        "alsa-base",
+        "alsa-utils",
+        "playerctl",
+        "pulseaudio-utils",
+        "brightnessctl"
       ]
-  tags:
-    - install
-    - gui
-
-- name: Install LightDM
-  become: true
-  apt:
-    name: "lightdm"
-    install_recommends: false
-    state: present
-    tags:
-      - install
-      - gui
-
-- name: Install LightDM dependencies
-  become: true
-  apt:
-    name: [
-      "lightdm-gtk-greeter",
-      "lightdm-gtk-greeter-settings"
-      ]
-    state: present
   tags:
     - install
     - gui

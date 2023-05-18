@@ -1,7 +1,7 @@
 - name: Install packages
   become: true
   apt:
-    name: ["tmux", "fzf", "tldr", "ripgrep", "fd-find", "ranger", "copyq"]
+    name: ["tmux", "fzf", "tldr", "ripgrep", "fd-find", "ranger"]
   tags:
     - install
     - productivity
@@ -10,6 +10,7 @@
   shell:
     tldr -u
   tags: 
+    - install
     - productivity
 
 - name: Install tpm for tmux
@@ -28,17 +29,19 @@
     mkdir -p ~/.local/bin
     ln -s $(which fdfind) ~/.local/bin/fd
   tags:
+    - install
     - productivity
 
 - name: Clone Autojump
   ansible.builtin.git:
     repo: "https://github.com/wting/autojump.git"
-    dest: "{{ ansible_env.HOME }}/.autojump"
+    dest: "{{ ansible_env.HOME }}/autojump"
   tags:
     - install
     - productivity
 - name: Install Autojump
+  ignore_errors: true
   shell: "cd {{ ansible_env.HOME }}/autojump && ./install.py"
   tags:
-    - install
-    - productivity
+  - install
+  - productivity
