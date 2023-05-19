@@ -1,0 +1,30 @@
+- name: TLP
+  become: true
+  apt:
+    name: ["tlp", "tlp-rdw"]
+  tags:
+    - laptop
+
+- name: TLP start
+  become: true
+  shell: tlp start
+  tags:
+    - laptop
+
+- name: Create destination directory if not exist
+  ansible.builtin.file:
+    path: /etc/X11/xorg.conf.d
+    state: directory
+    mode: "0755"
+  become: true
+# - name: Touchpad
+#   ansible.builtin.copy:
+#     src: "{{ lookup('file', '~/ansible/laptop/touchpad.conf') }}"
+#     dest: /etc/X11/xorg.conf.d/90-touchpad.conf
+#     owner: root
+#     group: root
+#     mode: "0644"
+#     remote_src: true
+#   become: true
+#   tags:
+#     - laptop

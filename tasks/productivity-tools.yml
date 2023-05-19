@@ -7,17 +7,7 @@
     - productivity
 - name: Update tldr
   ignore_errors: true
-  shell:
-    tldr -u
-  tags: 
-    - install
-    - productivity
-
-- name: Install tpm for tmux
-  become: true
-  git:
-    repo: https://github.com/tmux-plugins/tpm.git
-    dest: "{{ ansible_env.HOME }}/.tmux/plugins/tpm"
+  shell: tldr -u
   tags:
     - install
     - productivity
@@ -43,5 +33,5 @@
   ignore_errors: true
   shell: "cd {{ ansible_env.HOME }}/autojump && ./install.py"
   tags:
-  - install
-  - productivity
+    - install
+    - productivity

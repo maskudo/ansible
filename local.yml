@@ -24,3 +24,5 @@
     - include: tasks/gui-setup.yml
     - include: tasks/gui-productivity.yml
     - include: tasks/fonts.yml
+    - include: tasks/cargo-tools.yml
+    - include: tasks/laptop.yml

@@ -1,13 +1,26 @@
 - name: Install packages
   become: true
   apt:
-    name: ["firefox", "kitty", "copyq", "flameshot"]
+    name: ["firefox", "kitty", "copyq", "flameshot", "flatpak", "nautilus"]
+  tags:
+    - install
+    - guip
+
+- name: Enable flatpak
+  become: true
+  shell: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
   tags:
     - install
     - guip
 
 - name: Install lazygit
   shell: go install github.com/jesseduffield/lazygit@latest
+  tags:
+    - install
+    - guip
+
+- name: Install discord
+  shell: flatpak install com.discordapp.Discord/x86_64/stable -y
   tags:
     - install
     - guip

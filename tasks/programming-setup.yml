@@ -11,34 +11,64 @@
   shell: "${HOME}/.asdf/bin/asdf plugin-add golang"
   register: golang_add
   failed_when: golang_add == 2
-  tags: 
+  tags:
     - install
     - programming
 - name: Install golang latest with asdf
   shell: "${HOME}/.asdf/bin/asdf install golang latest"
-  tags: 
+  tags:
     - install
     - programming
-- name: Set global version for golang to latest 
+- name: Set global version for golang to latest
   shell: "${HOME}/.asdf/bin/asdf global golang latest"
-  tags: 
+  tags:
     - install
     - programming
-
 
 - name: Add nodejs plugin to asdf
   shell: "${HOME}/.asdf/bin/asdf plugin-add nodejs"
-  tags: 
+  register: nodejs_add
+  failed_when: nodejs_add == 2
+  tags:
     - install
     - programming
 - name: Install nodejs latest with asdf
   shell: "${HOME}/.asdf/bin/asdf install nodejs latest"
-  tags: 
+  tags:
     - install
     - programming
-- name: Set global version for nodejs to latest 
+- name: Set global version for nodejs to latest
   shell: "${HOME}/.asdf/bin/asdf global nodejs latest"
-  tags: 
+  tags:
     - install
     - programming
 
+- name: Install rustup
+  shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+  tags:
+    - install
+    - programming
+
+- name: Set up Rust environment
+  shell: ". $HOME/.cargo/env"
+  tags:
+    - install
+    - programming
+
+- name: Install Rust components and toolchain
+  shell: rustup toolchain install stable
+  tags:
+    - install
+    - programming
+
+- name: Install rust-analyzer
+  shell: rustup component add rust-analyzer
+  tags:
+    - install
+    - programming
+
+- name: Install Clippy
+  shell: rustup component add clippy
+  tags:
+    - install
+    - programming

@@ -1,12 +1,15 @@
-- name: Create font directory if not exists
+- name: Create font directories if not exist
   ansible.builtin.file:
-    path: /usr/share/fonts/nerd-fonts/JetBrainsMono
+    path: "{{ item }}"
     state: directory
     mode: "0755"
   become: true
   tags:
     - install
     - font
+  with_items:
+    - /usr/share/fonts/nerd-fonts/FontAwesome
+    - /usr/share/fonts/nerd-fonts/JetBrainsMono
 
 - name: Download and extract Nerd Fonts
   become: true
@@ -14,13 +17,31 @@
     src: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
     dest: "/usr/share/fonts/nerd-fonts/JetBrainsMono"
     remote_src: true
-  tags: 
+  tags:
+    - install
+    - font
+
+- name: Download and extract Font Awesome
+  become: true
+  ansible.builtin.unarchive:
+    src: "https://github.com/FortAwesome/Font-Awesome/releases/download/6.4.0/fontawesome-free-6.4.0-desktop.zip"
+    dest: "/usr/share/fonts/nerd-fonts/FontAwesome"
+    remote_src: true
+  tags:
+    - install
+    - font
+
+- name: Install extra fonts
+  become: true
+  apt:
+    name: "fonts-noto"
+  tags:
     - install
     - font
 
 - name: Update font cache
   become: true
   command: fc-cache -f -v
-  tags: 
+  tags:
     - install
     - font

@@ -1,0 +1,24 @@
+- name: Install du-dust
+  shell: cargo install du-dust
+  tags:
+    - install
+    - programming
+    - cargo
+- name: Install exa
+  shell: cargo install exa
+  tags:
+    - install
+    - programming
+    - cargo
+- name: Install bat
+  shell: cargo install bat --locked
+  tags:
+    - install
+    - programming
+    - cargo
+- name: Install starship
+  shell: cargo install starship --locked
+  tags:
+    - install
+    - programming
+    - cargo

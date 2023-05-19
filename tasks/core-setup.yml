@@ -30,6 +30,7 @@
         "python3-pip",
         "python-is-python3",
         "dconf-editor",
+        "mesa-utils",
         "nvidia-settings",
         "pavucontrol",
         "clangd",
@@ -54,7 +55,6 @@
     - install
     - neovim
     - core
-
 
 - name: Disable network-wait-online.service
   ignore_errors: true
