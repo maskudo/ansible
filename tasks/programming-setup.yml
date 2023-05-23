@@ -50,7 +50,7 @@
     - programming
 
 - name: Set up Rust environment
-  shell: ". $HOME/.cargo/env"
+  shell: ". {{ansible_env.HOME}}/.cargo/env"
   tags:
     - install
     - programming

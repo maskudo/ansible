@@ -1,7 +1,7 @@
 - name: Install packages
   become: true
   apt:
-    name: ["firefox", "kitty", "copyq", "flameshot", "flatpak", "nautilus"]
+    name: ["firefox", "copyq", "flameshot", "flatpak", "nautilus", "mpv", "vlc"]
   tags:
     - install
     - guip

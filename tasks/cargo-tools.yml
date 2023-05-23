@@ -22,3 +22,9 @@
     - install
     - programming
     - cargo
+- name: Install navi
+  shell: cargo install navi --locked
+  tags:
+    - install
+    - programming
+    - cargo

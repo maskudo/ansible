@@ -1,10 +1,28 @@
 - name: Install packages
   become: true
   apt:
-    name: ["tmux", "fzf", "tldr", "ripgrep", "fd-find", "ranger"]
+    name: [
+        "tmux",
+        "fzf",
+        "tldr",
+        "ripgrep",
+        "fd-find",
+        "ranger",
+        # "rclone",
+        # "rclone-browser",
+      ]
   tags:
     - install
     - productivity
+
+- name: Install tpm for tmux
+  ansible.builtin.git:
+    repo: "https://github.com/tmux-plugins/tpm.git"
+    dest: "{{ansible_env.HOME}}/.tmux/plugins/tpm/"
+  tags:
+    - install
+    - productivity
+
 - name: Update tldr
   ignore_errors: true
   shell: tldr -u
@@ -29,6 +47,7 @@
   tags:
     - install
     - productivity
+
 - name: Install Autojump
   ignore_errors: true
   shell: "cd {{ ansible_env.HOME }}/autojump && ./install.py"
