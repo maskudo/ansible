@@ -13,12 +13,6 @@
     - install
     - guip
 
-- name: Install lazygit
-  shell: go install github.com/jesseduffield/lazygit@latest
-  tags:
-    - install
-    - guip
-
 - name: Install discord
   shell: flatpak install com.discordapp.Discord/x86_64/stable -y
   tags:
