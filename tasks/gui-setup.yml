@@ -37,13 +37,32 @@
     - install
     - gui
 - name: Add kitty to PATH
-  become: true
+  ansible.builtin.file:
+    src: ~/.local/kitty.app/bin/kitty
+    dest: ~/.local/bin/kitty
+    state: link
   ignore_errors: true
-  shell: ln -s ~/.local/kitty.app/bin/kitty /usr/local/bin/
   tags:
     - install
     - gui
+- name: Add kitten to PATH
+  ansible.builtin.file:
+    src: ~/.local/kitty.app/bin/kitten
+    dest: ~/.local/bin/kitten
+    state: link
+  ignore_errors: true
+  tags:
+    - install
+    - gui
+
+- name: Create destination directory if not exist
+  ansible.builtin.file:
+    path: ~/.local/share/applications
+    state: directory
+    mode: "0755"
+
 - name: Add kitty to application launcher
+  ignore_errors: true
   shell: cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
   tags:
     - install

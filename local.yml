@@ -18,12 +18,12 @@
     - include: tasks/git-setup.yml
     - include: tasks/ssh.yml
     - include: tasks/dotfiles.yml
-    - include: tasks/programming-setup.yml
     - include: tasks/neovim.yml
     - include: tasks/productivity-tools.yml
     - include: tasks/gui-setup.yml
     - include: tasks/gui-productivity.yml
     - include: tasks/fonts.yml
+    - include: tasks/programming-setup.yml
     - include: tasks/cli-tools.yml
     - include: tasks/laptop.yml
     - include: tasks/extras.yml
