@@ -31,6 +31,13 @@
     - install
     - gui
 
+- name: Enable light
+  become: true
+  shell: chmod +s /usr/bin/light
+  tags:
+    - install
+    - gui
+
 - name: Install kitty latest
   shell: curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin launch=n
   tags:

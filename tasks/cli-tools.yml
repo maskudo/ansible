@@ -2,5 +2,10 @@
   shell: go install github.com/jesseduffield/lazygit@latest
   tags:
     - install
-    - guip
+    - cli
+
+- name: Install lazydocker
+  shell: go install github.com/jesseduffield/lazydocker@latest
+  tags:
+    - install
     - cli

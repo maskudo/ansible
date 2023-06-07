@@ -45,3 +45,18 @@
   tags:
     - install
     - font
+
+- name: Create destination directory if not exist
+  ansible.builtin.file:
+    path: ~/.icons/
+    state: directory
+    mode: "0755"
+- name: Install dracula icons
+  ignore_errors: true
+  ansible.builtin.unarchive:
+    src: "https://github.com/matheuuus/dracula-icons/archive/refs/heads/main.zip"
+    dest: ~/.icons/
+    remote_src: true
+  tags:
+    - install
+    - font
