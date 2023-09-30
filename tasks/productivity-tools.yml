@@ -8,6 +8,7 @@
         "ripgrep",
         "fd-find",
         "ranger",
+        "net-tools",
         # "rclone",
         # "rclone-browser",
       ]

@@ -1,65 +1,32 @@
-- name: Install rustup
-  shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+- name: Check if Rust is installed
+  command: rustc --version
+  register: rust_check
+  ignore_errors: yes
+  changed_when: false
   tags:
-    - install
-    - programming
+    - rust
 
-- name: Set up Rust environment
-  shell: ". {{ansible_env.HOME}}/.cargo/env"
+- name: Download Rust Installer
+  get_url:
+    url: https://sh.rustup.rs
+    dest: /tmp/sh.rustup.rs
+    mode: "0755"
+    force: "yes"
   tags:
-    - install
-    - programming
+    - rust
+  when: rust_check.failed
 
-- name: Install Rust components and toolchain
-  shell: rustup toolchain install stable
+- name: Install Rust and Cargo
+  shell: /tmp/sh.rustup.rs -y
   tags:
-    - install
-    - programming
+    - rust
+  when: rust_check.failed
 
-- name: Install rust-analyzer
-  shell: rustup component add rust-analyzer
+- name: Set Cargo Environment Variables
+  shell: |
+    bash -c "source $HOME/.cargo/env"
+  environment:
+    HOME: "{{ ansible_env.HOME }}"
   tags:
-    - install
-    - programming
-
-- name: Install Clippy
-  shell: rustup component add clippy
-  tags:
-    - install
-    - programming
-
-- name: Install du-dust
-  shell: cargo install du-dust
-  tags:
-    - install
-    - programming
-    - cargo
-    - cli
-- name: Install exa
-  shell: cargo install exa
-  tags:
-    - install
-    - programming
-    - cargo
-    - cli
-- name: Install bat
-  shell: cargo install bat --locked
-  tags:
-    - install
-    - programming
-    - cargo
-    - cli
-- name: Install starship
-  shell: cargo install starship --locked
-  tags:
-    - install
-    - programming
-    - cargo
-    - cli
-- name: Install navi
-  shell: cargo install navi --locked
-  tags:
-    - install
-    - programming
-    - cargo
-    - cli
+    - rust
+  when: rust_check.failed

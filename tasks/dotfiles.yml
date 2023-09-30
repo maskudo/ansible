@@ -18,8 +18,14 @@
     - install
     - dotfiles
     - stow
+
+- name: Remove .bashrc if it exists
+  file:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    state: absent
+
 - name: Stow dotfiles
-  shell: cd $HOME/.dotfiles && stow dunst i3 kitty lazyvim picom polybar rofi scripts starship tmux vim wallpapers
+  shell: cd $HOME/.dotfiles && stow dunst i3 kitty lazyvim picom polybar rofi scripts starship tmux vim wallpapers bash
   tags:
     - install
     - dotfiles
