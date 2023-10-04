@@ -1,7 +1,7 @@
 - name: TLP
   become: true
   apt:
-    name: ["tlp", "tlp-rdw"]
+    name: ["tlp", "tlp-rdw", "ldmtool"]
   tags:
     - laptop
 
@@ -29,9 +29,26 @@
   become: true
   ansible.builtin.copy:
     dest: /etc/X11/xorg.conf.d/90-touchpad.conf
-    src: ~/ansible/configs/touchpad.conf
+    src: ./configs/touchpad.conf
     owner: root
     group: root
     mode: "0644"
+  tags:
+    - laptop
+
+- name: Touchpad
+  become: true
+  ansible.builtin.copy:
+    dest: /etc
+    src: ./configs/rc.local
+    owner: root
+    group: root
+    mode: "0644"
+  tags:
+    - laptop
+
+- name: Enable ldmtool
+  become: true
+  shell: chmod +x /etc/rc.local
   tags:
     - laptop

@@ -105,7 +105,7 @@
   become: true
   ansible.builtin.copy:
     dest: /etc/sddm.conf
-    src: "{{ansible_env.HOME}}/ansible/configs/sddm.conf"
+    src: "./configs/sddm.conf"
   tags:
     - install
     - gui

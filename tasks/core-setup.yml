@@ -28,6 +28,7 @@
         "ccache",
         "ninja-build",
         "python3-pip",
+        "python3-venv",
         "python-is-python3",
         "dconf-editor",
         "mesa-utils",

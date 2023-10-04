@@ -1,7 +1,7 @@
 - name: Install packages
   become: true
   apt:
-    name: ["copyq", "flameshot", "flatpak", "nautilus", "mpv", "vlc", "firefox"]
+    name: ["copyq", "flameshot", "flatpak", "thunar", "mpv", "vlc", "firefox"]
   tags:
     - install
     - guip
@@ -15,6 +15,18 @@
 
 - name: Install discord
   shell: flatpak install com.discordapp.Discord/x86_64/stable -y
+  tags:
+    - install
+    - guip
+
+- name: Install VSCode
+  shell: flatpak install com.visualstudio.code -y
+  tags:
+    - install
+    - guip
+
+- name: Install Brave
+  shell: flatpak install flathub com.brave.Browser -y
   tags:
     - install
     - guip

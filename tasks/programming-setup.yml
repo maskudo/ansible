@@ -6,7 +6,13 @@
   tags:
     - install
     - programming
+- name: Source .bashrc
+  shell: ". $HOME/.bashrc"
+  tags:
+    - install
+    - programming
 
+# golang
 - name: Add golang plugin to asdf
   shell: "${HOME}/.asdf/bin/asdf plugin-add golang"
   register: golang_add
@@ -25,6 +31,7 @@
     - install
     - programming
 
+#nodejs
 - name: Add nodejs plugin to asdf
   shell: "${HOME}/.asdf/bin/asdf plugin-add nodejs"
   register: nodejs_add
@@ -43,6 +50,26 @@
     - install
     - programming
 
+#rust
+- name: Add rust plugin to asdf
+  shell: "${HOME}/.asdf/bin/asdf plugin-add rust https://github.com/code-lever/asdf-rust.git"
+  register: rust_add
+  failed_when: rust_add == 2
+  tags:
+    - install
+    - programming
+- name: Install rust latest with asdf
+  shell: "${HOME}/.asdf/bin/asdf install rust latest"
+  tags:
+    - install
+    - programming
+- name: Set global version for rust to latest
+  shell: "${HOME}/.asdf/bin/asdf global rust latest"
+  tags:
+    - install
+    - programming
+
+#docker
 - name: Install docker dependency
   become: true
   apt:
