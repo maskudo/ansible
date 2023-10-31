@@ -1,0 +1,79 @@
+- name: Install packages
+  become: true
+  ansible.builtin.apt:
+    name:
+      [
+        "copyq",
+        "flameshot",
+        "thunar",
+        "mpv",
+        "vlc",
+        "gimp",
+        "firefox",
+        "flatpak",
+      ]
+  tags:
+    - install
+    - guip
+
+- name: Install kitty latest
+  ansible.builtin.shell: curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin launch=n
+  tags:
+    - install
+    - gui
+- name: Add kitty to PATH
+  ansible.builtin.file:
+    src: ~/.local/kitty.app/bin/kitty
+    dest: ~/.local/bin/kitty
+    state: link
+  ignore_errors: true
+  tags:
+    - install
+    - gui
+- name: Add kitten to PATH
+  ansible.builtin.file:
+    src: ~/.local/kitty.app/bin/kitten
+    dest: ~/.local/bin/kitten
+    state: link
+  ignore_errors: true
+  tags:
+    - install
+    - gui
+
+- name: Create destination directory if not exist
+  ansible.builtin.file:
+    path: ~/.local/share/applications
+    state: directory
+    mode: "0755"
+
+- name: Add kitty to application launcher
+  ignore_errors: true
+  ansible.builtin.shell: cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
+  tags:
+    - install
+    - gui
+
+- name: Enable flatpak
+  become: true
+  ansible.builtin.shell: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+  tags:
+    - install
+    - guip
+
+- name: Install discord
+  ansible.builtin.shell: flatpak install com.discordapp.Discord/x86_64/stable -y
+  tags:
+    - install
+    - guip
+
+- name: Install VSCode
+  ansible.builtin.shell: flatpak install com.visualstudio.code -y
+  tags:
+    - install
+    - guip
+
+- name: Install Brave
+  ansible.builtin.shell: flatpak install flathub com.brave.Browser -y
+  tags:
+    - install
+    - guip

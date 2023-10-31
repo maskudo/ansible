@@ -1,0 +1,11 @@
+- name: Install Ansible Galaxy Collection
+  become: true
+  ansible.builtin.command: ansible-galaxy collection install community.general
+  tags:
+    - install
+
+- name: Config tasks
+  ansible.builtin.include_tasks: "{{ item }}"
+  loop:
+    - core-gui.yml
+    - gui-productivity.yml

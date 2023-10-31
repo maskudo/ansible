@@ -1,0 +1,30 @@
+- name: Install lazygit
+  ansible.builtin.shell: go install github.com/jesseduffield/lazygit@latest
+  tags:
+    - install
+    - cli
+
+- name: Install lazydocker
+  ansible.builtin.shell: go install github.com/jesseduffield/lazydocker@latest
+  tags:
+    - install
+    - cli
+
+- name: Install starship
+  ansible.builtin.shell: cargo install starship --locked
+  tags:
+    - install
+    - cli
+
+- name: Install bat
+  ansible.builtin.shell: cargo install bat --locked
+  tags:
+    - install
+    - cli
+
+- name: reshim rust
+  ansible.builtin.shell: "${HOME}/.asdf/bin/asdf reshim rust "
+  ignore_errors: true
+  tags:
+    - install
+    - cli

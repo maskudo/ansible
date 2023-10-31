@@ -1,0 +1,28 @@
+- name: Download Nerd Fonts
+  ansible.builtin.include_tasks: download.yml
+  loop:
+    - FiraCode
+    - DejaVuSansMono
+    - JetBrainsMono
+    - FantasqueSansMono
+    - VictorMono
+    - SourceCodePro
+    - Hack
+
+- name: Install extra fonts
+  become: true
+  ansible.builtin.apt:
+    name: "fonts-noto"
+  tags:
+    - install
+    - font
+
+- name: Download and extract Font Awesome
+  become: true
+  ansible.builtin.unarchive:
+    src: "https://github.com/FortAwesome/Font-Awesome/releases/download/6.4.0/fontawesome-free-6.4.0-desktop.zip"
+    dest: ~/.local/share/fonts/FontAwesome
+    remote_src: true
+  tags:
+    - install
+    - font

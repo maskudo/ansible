@@ -1,0 +1,3 @@
+#!/bin/bash
+ldmtool create all
+exit 0

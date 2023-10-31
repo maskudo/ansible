@@ -1,0 +1,41 @@
+- name: Install GUI
+  become: true
+  ansible.builtin.apt:
+    name:
+      [
+        "picom",
+        "i3",
+        "lxappearance",
+        "arc-theme",
+        "x11-utils",
+        "x11-xserver-utils",
+        "xinput",
+        "xdotool",
+        "rofi",
+        "polybar",
+        "feh",
+        "dunst",
+        "light",
+        "qml-module-qtquick-controls",
+        "qml-module-qtquick-layouts",
+        "alsa-base",
+        "alsa-utils",
+        "playerctl",
+        "pulseaudio-utils",
+        "brightnessctl",
+        "gnome-disk-utility",
+        "galternatives",
+        "arandr",
+      ]
+  tags:
+    - install
+    - gui
+
+- name: Set permissions for /usr/bin/light
+  become: true
+  ansible.builtin.file:
+    path: /usr/bin/light
+    mode: "6755"
+  tags:
+    - install
+    - gui
