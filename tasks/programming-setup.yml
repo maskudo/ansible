@@ -85,6 +85,7 @@
   tags:
     - install
     - programming
+    - docker
 - name: Add docker GPG key
   become: true
   apt_key:
@@ -93,6 +94,7 @@
   tags:
     - install
     - programming
+    - docker
 - name: Add docker repository to apt
   become: true
   apt_repository:
@@ -101,6 +103,7 @@
   tags:
     - install
     - programming
+    - docker
 - name: install docker
   become: true
   apt:
@@ -115,6 +118,7 @@
   tags:
     - install
     - programming
+    - docker
 - name: Enable docker
   become: true
   service:
@@ -124,3 +128,24 @@
   tags:
     - install
     - programming
+    - docker
+
+- name: Ensure the Docker group exists
+  group:
+    name: docker
+    state: present
+  tags:
+    - install
+    - programming
+    - docker
+
+- name: Add the current user "{{ lookup('env', 'USER') }}" to the Docker group
+  user:
+    name: "{{ lookup('env', 'USER') }}"
+    groups: docker
+    append: yes
+  become: yes
+  tags:
+    - install
+    - programming
+    - docker

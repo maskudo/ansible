@@ -3,12 +3,15 @@
   apt:
     name: [
         "tmux",
+        "vim",
         "fzf",
         "tldr",
         "ripgrep",
         "fd-find",
         "ranger",
         "net-tools",
+        "zoxide",
+        "rxvt-unicode",
         # "rclone",
         # "rclone-browser",
       ]
@@ -40,18 +43,17 @@
   tags:
     - install
     - productivity
-
-- name: Clone Autojump
-  ansible.builtin.git:
-    repo: "https://github.com/wting/autojump.git"
-    dest: "{{ ansible_env.HOME }}/autojump"
-  tags:
-    - install
-    - productivity
-
-- name: Install Autojump
-  ignore_errors: true
-  shell: "cd {{ ansible_env.HOME }}/autojump && ./install.py"
-  tags:
-    - install
-    - productivity
+# - name: Clone Autojump
+#   ansible.builtin.git:
+#     repo: "https://github.com/wting/autojump.git"
+#     dest: "{{ ansible_env.HOME }}/autojump"
+#   tags:
+#     - install
+#     - productivity
+#
+# - name: Install Autojump
+#   ignore_errors: true
+#   shell: "cd {{ ansible_env.HOME }}/autojump && ./install.py"
+#   tags:
+#     - install
+#     - productivity

@@ -1,23 +1,23 @@
-- name: TLP
-  become: true
-  apt:
-    name: ["tlp", "tlp-rdw", "ldmtool"]
-  tags:
-    - laptop
-
-- name: TLP start
-  become: true
-  shell: tlp start
-  tags:
-    - laptop
-- name: Enable TLP
-  become: true
-  ignore_errors: true
-  systemd:
-    name: tlp.service
-    enabled: true
-  tags:
-    - laptop
+# - name: TLP
+#   become: true
+#   apt:
+#     name: ["tlp", "tlp-rdw", "ldmtool"]
+#   tags:
+#     - laptop
+#
+# - name: TLP start
+#   become: true
+#   shell: tlp start
+#   tags:
+#     - laptop
+# - name: Enable TLP
+#   become: true
+#   ignore_errors: true
+#   systemd:
+#     name: tlp.service
+#     enabled: true
+#   tags:
+#     - laptop
 
 - name: Create destination directory if not exist
   become: true
@@ -36,7 +36,7 @@
   tags:
     - laptop
 
-- name: Touchpad
+- name: Hard Disk
   become: true
   ansible.builtin.copy:
     dest: /etc

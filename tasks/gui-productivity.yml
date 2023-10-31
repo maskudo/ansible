@@ -1,7 +1,17 @@
 - name: Install packages
   become: true
   apt:
-    name: ["copyq", "flameshot", "flatpak", "thunar", "mpv", "vlc", "firefox"]
+    name:
+      [
+        "copyq",
+        "flameshot",
+        "thunar",
+        "mpv",
+        "vlc",
+        "gimp",
+        "firefox",
+        "flatpak",
+      ]
   tags:
     - install
     - guip
