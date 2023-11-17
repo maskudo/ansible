@@ -1,7 +1,8 @@
 - name: Install packages
   become: true
   ansible.builtin.apt:
-    name: [
+    name:
+      [
         "tmux",
         "vim",
         "fzf",
@@ -12,8 +13,10 @@
         "net-tools",
         "zoxide",
         "rxvt-unicode",
-        # "rclone",
-        # "rclone-browser",
+        "jq",
+        "rclone",
+        "rclone-browser",
+        "pandoc",
       ]
   tags:
     - install
