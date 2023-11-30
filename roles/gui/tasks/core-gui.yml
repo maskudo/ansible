@@ -11,6 +11,7 @@
         "x11-xserver-utils",
         "xinput",
         "xdotool",
+        "xclip",
         "rofi",
         "polybar",
         "feh",

@@ -26,7 +26,7 @@
     state: absent
 
 - name: Stow dotfiles
-  ansible.builtin.shell: cd $HOME/.dotfiles && stow dunst i3 kitty lazyvim picom polybar rofi scripts starship tmux vim wallpapers bash
+  ansible.builtin.shell: cd $HOME/.dotfiles && stow dunst i3 kitty nvim picom polybar rofi scripts starship tmux vim wallpapers lf tldr smplayer bash
   tags:
     - install
     - dotfiles

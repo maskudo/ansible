@@ -1,3 +1,9 @@
+- name: Install lf
+  ansible.builtin.shell: env CGO_ENABLED=0 go install -ldflags="-s -w" github.com/gokcehan/lf@latest
+  tags:
+    - install
+    - cli
+
 - name: Install lazygit
   ansible.builtin.shell: go install github.com/jesseduffield/lazygit@latest
   tags:
@@ -10,14 +16,32 @@
     - install
     - cli
 
-- name: Install starship
-  ansible.builtin.shell: cargo install starship --locked
+- name: Install cargo binstall
+  ansible.builtin.shell: "curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash"
   tags:
     - install
     - cli
 
+- name: Install starship
+  ansible.builtin.shell: cargo binstall starship --locked -y
+  tags:
+    - install
+    - cli
+
+- name: Install dust
+  ansible.builtin.shell: cargo binstall du-dust --locked -y
+  tags:
+    - install
+    - cli
+
+# - name: Install tldr
+#   ansible.builtin.shell: cargo binstall tealdeer --locked -y
+#   tags:
+#     - install
+#     - cli
+
 - name: Install bat
-  ansible.builtin.shell: cargo install bat --locked
+  ansible.builtin.shell: cargo binstall bat --locked -y
   tags:
     - install
     - cli
