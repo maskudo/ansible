@@ -1,6 +1,5 @@
 - name: Programming tools tasks
   ansible.builtin.include_tasks: "{{ item }}"
   loop:
-    - productivity.yml
     - languages.yml
     - cli.yml

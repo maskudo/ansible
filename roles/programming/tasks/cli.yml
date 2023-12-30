@@ -1,37 +1,142 @@
+- name: Install docker dependency
+  become: true
+  ansible.builtin.apt:
+    name: "{{item}}"
+    state: present
+    update_cache: true
+  loop:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - gnupg-agent
+    - software-properties-common
+  tags:
+    - install
+    - programming
+    - docker
+- name: Add docker GPG key
+  become: true
+  ansible.builtin.apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+  tags:
+    - install
+    - programming
+    - docker
+- name: Add docker repository to apt
+  become: true
+  ansible.builtin.apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu bionic stable
+    state: present
+  tags:
+    - install
+    - programming
+    - docker
+- name: install docker
+  become: true
+  ansible.builtin.apt:
+    name: "{{item}}"
+    state: latest
+    update_cache: true
+  loop:
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+    - docker-compose-plugin
+  tags:
+    - install
+    - programming
+    - docker
+- name: Enable docker
+  become: true
+  ansible.builtin.service:
+    name: docker
+    state: started
+    enabled: true
+  tags:
+    - install
+    - programming
+    - docker
+
+- name: Ensure the Docker group exists
+  ansible.builtin.group:
+    name: docker
+    state: present
+  tags:
+    - install
+    - programming
+    - docker
+
+- name: Add the current user "{{ lookup('env', 'USER') }}" to the Docker group
+  ansible.builtin.user:
+    name: "{{ lookup('env', 'USER') }}"
+    groups: docker
+    append: true
+  become: true
+  tags:
+    - install
+    - programming
+    - docker
+
+# neovim
+- name: Add neovim plugin to asdf
+  ansible.builtin.shell: "${HOME}/.asdf/bin/asdf plugin-add neovim"
+  register: neovim_add
+  failed_when: neovim_add== 2
+  tags:
+    - install
+    - programming
+- name: Install neovim latest with asdf
+  ansible.builtin.shell: "${HOME}/.asdf/bin/asdf install neovim latest"
+  tags:
+    - install
+    - programming
+- name: Set global version for neovim to latest
+  ansible.builtin.shell: "${HOME}/.asdf/bin/asdf global neovim latest"
+  tags:
+    - install
+    - programming
+
 - name: Install lf
   ansible.builtin.shell: env CGO_ENABLED=0 go install -ldflags="-s -w" github.com/gokcehan/lf@latest
   tags:
     - install
+    - programming
     - cli
 
 - name: Install lazygit
   ansible.builtin.shell: go install github.com/jesseduffield/lazygit@latest
   tags:
     - install
+    - programming
     - cli
 
 - name: Install lazydocker
   ansible.builtin.shell: go install github.com/jesseduffield/lazydocker@latest
   tags:
     - install
+    - programming
     - cli
 
 - name: Install cargo binstall
   ansible.builtin.shell: "curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash"
   tags:
     - install
+    - programming
     - cli
 
 - name: Install starship
   ansible.builtin.shell: cargo binstall starship --locked -y
   tags:
     - install
+    - programming
     - cli
 
 - name: Install dust
   ansible.builtin.shell: cargo binstall du-dust --locked -y
   tags:
     - install
+    - programming
     - cli
 
 # - name: Install tldr
@@ -44,6 +149,7 @@
   ansible.builtin.shell: cargo binstall bat --locked -y
   tags:
     - install
+    - programming
     - cli
 
 - name: reshim rust
@@ -51,4 +157,5 @@
   ignore_errors: true
   tags:
     - install
+    - programming
     - cli

@@ -1,7 +1,8 @@
 - name: Laptop specific packages
   become: true
   ansible.builtin.apt:
-    name: ["tlp", "tlp-rdw", "ldmtool"]
+    # name: ["tlp", "tlp-rdw", "ldmtool"]
+    name: ["ldmtool"]
   tags:
     - laptop
 - name: Create destination directory if not exist

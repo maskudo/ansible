@@ -27,6 +27,7 @@
         "gnome-disk-utility",
         "galternatives",
         "arandr",
+        "rxvt-unicode",
       ]
   tags:
     - install
