@@ -4,7 +4,6 @@
     name: ["build-essential", "cmake", "pkg-config", "libpthread-stubs0-dev"]
   tags:
     - install
-    - neovim
     - core
 
 - name: Install System Packages 2 (lua, unzip, libtool, libtool-bin, gettext)
@@ -13,7 +12,6 @@
     name: ["lua5.1", "unzip", "libtool", "libtool-bin", "gettext"]
   tags:
     - install
-    - neovim
     - core
 
 - name: Install System Packages 3 (the rest)
@@ -55,7 +53,6 @@
 
   tags:
     - install
-    - neovim
     - core
 
 - name: Disable network-wait-online.service
@@ -92,6 +89,7 @@
         "net-tools",
         "zoxide",
         "jq",
+        "ffmpeg",
         "rclone",
         "rclone-browser",
         "pandoc",
@@ -100,20 +98,11 @@
     - install
     - productivity
 
-- name: Install tpm for tmux
-  ansible.builtin.git:
-    repo: "https://github.com/tmux-plugins/tpm.git"
-    dest: "{{ansible_env.HOME}}/.tmux/plugins/tpm/"
-  tags:
-    - install
-    - productivity
-
-- name: Create symbolic link for fd
-  become: true
-  ignore_errors: true
-  ansible.builtin.shell: |
-    mkdir -p ~/.local/bin
-    ln -s $(which fdfind) ~/.local/bin/fd
+- name: Create a symbolic link for fd
+  ansible.builtin.file:
+    src: /usr/bin/fdfind
+    dest: "{{ ansible_env.HOME }}/.local/bin/fd"
+    state: link
   tags:
     - install
     - productivity
