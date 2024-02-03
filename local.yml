@@ -13,7 +13,7 @@
   roles:
     - core
     - configs
-    - fonts
+    # - fonts
     # - gui
-    - laptop
+    # - laptop
     - programming

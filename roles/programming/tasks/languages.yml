@@ -41,11 +41,14 @@
     - programming
 - name: Install nodejs latest with asdf
   ansible.builtin.shell: "${HOME}/.asdf/bin/asdf install nodejs latest"
+  ignore_errors: true
   tags:
     - install
     - programming
+
 - name: Set global version for nodejs to latest
   ansible.builtin.shell: "${HOME}/.asdf/bin/asdf global nodejs latest"
+  ignore_errors: true
   tags:
     - install
     - programming
