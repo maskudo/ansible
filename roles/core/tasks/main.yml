@@ -98,11 +98,16 @@
     - install
     - productivity
 
-- name: Create a symbolic link for fd
+- name: Find fdfind executable
+  ansible.builtin.command: "which fdfind"
+  register: fdfind_location
+  changed_when: false
+  check_mode: false
+
+- name: Create symlink to fdfind
+  ignore_errors: true
   ansible.builtin.file:
-    src: /usr/bin/fdfind
+    src: "{{ fdfind_location.stdout }}"
     dest: "{{ ansible_env.HOME }}/.local/bin/fd"
     state: link
-  tags:
-    - install
-    - productivity
+    force: true

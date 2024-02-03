@@ -1,0 +1,22 @@
+name: Ansible Playbook
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
+jobs:
+  run-ansible-playbook:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+      - name: Install Ansible
+        run: |
+          python -m pip install --upgrade pip
+          pip install ansible
+      - name: checkout repo
+        uses: actions/checkout@v4
+      - name: run ansible-playbook
+        run: |
+          cd ${{ github.workspace }}
+          cat local.yml
+          ansible-playbook  --vault-password-file <(echo ${{ secrets.VAULT_PASS }}) local.yml

@@ -17,6 +17,13 @@
     - install
     - font
 
+- name: Create destination directory if not exist
+  become: true
+  ansible.builtin.file:
+    path: ~/.local/share/fonts/FontAwesome
+    state: directory
+    mode: "0755"
+
 - name: Download and extract Font Awesome
   become: true
   ansible.builtin.unarchive:
