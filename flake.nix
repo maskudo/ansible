@@ -1,21 +1,14 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
   };
-  outputs = {
-    self,
-    nixpkgs,
-    flake-utils,
-  }:
-    flake-utils.lib.eachDefaultSystem (
-      system: let
-        pkgs = nixpkgs.legacyPackages.${system};
-      in
-        with pkgs; {
-          devShells.default = mkShell {
-            buildInputs = [ansible act];
-          };
-        }
-    );
+  outputs = {nixpkgs, ...}: let
+    system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
+  in {
+    devShells.${system}.default = with pkgs;
+      mkShell {
+        buildInputs = [ansible act];
+      };
+  };
 }
